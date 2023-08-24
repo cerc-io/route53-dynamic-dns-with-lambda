@@ -32,7 +32,7 @@ function getip {
     fi
     
     #Get IP
-    ip=`curl --ipv4 -q -s -X POST -H 'content-type: application/json' -d '{"execution_mode":"get"}' $url | egrep -o '[0-9\.]+'`
+    ip=`curl --ipv6 -q -s -X POST -H 'content-type: application/json' -d '{"execution_mode":"get"}' $url | jq -r .return_message`
     
     #Return error
     if [ -z $ip ]; then
@@ -61,7 +61,7 @@ elif [ $mode = "set" ]; then
     #Create hash
     hash=`echo -n $ip$host$secret | shasum -a 256 | awk '{print $1}'`
     #Call lambda url
-    curl --ipv4 -s -X POST -w ",{\"status_code\":\"%{http_code}\"}" -H 'content-type: application/json' -d '{"execution_mode":"'$mode'", "ddns_hostname":"'$host'", "validation_hash":"'$hash'"}' $url
+    curl --ipv6 -s -X POST -w ",{\"status_code\":\"%{http_code}\"}" -H 'content-type: application/json' -d '{"execution_mode":"'$mode'", "ddns_hostname":"'$host'", "validation_hash":"'$hash'"}' $url
 else
      echo "Mode is required as 'get' or 'set', pass it with argument -m, i.e. $0 -m get -u https://xyz.lambda-url.eu-west1.on.aws/"
      exit 1

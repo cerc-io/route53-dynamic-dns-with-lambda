@@ -120,7 +120,7 @@ def run_set_mode(ddns_hostname, validation_hash, source_ip):
     # record TTL (Time To Live) in seconds tells DNS servers how long to cache
     # the record.
     route_53_record_ttl=record_config_set['route_53_record_ttl']
-    route_53_record_type="A"
+    route_53_record_type="AAAA"
     shared_secret=record_config_set['shared_secret']
 
     # Validate that the client passed a sha256 hash

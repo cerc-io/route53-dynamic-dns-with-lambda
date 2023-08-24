@@ -16,7 +16,7 @@ class DyndnsStack(cdk.Stack):
             "ddFunction", #this is what the user can pass as --parameters ddFunction="your_name"
             type="String",
             description="Provide the function name for the runtime",
-            default=""
+            default="test_name"
         )
      
         
@@ -63,7 +63,7 @@ class DyndnsStack(cdk.Stack):
 
         if runtime_function_name.value_as_string !="":
             fn = lambda_.Function(self, "dyndns_fn",
-                runtime=lambda_.Runtime.PYTHON_3_9,
+                runtime=lambda_.Runtime.PYTHON_3_10,
                 architecture=lambda_.Architecture.ARM_64,
                 handler="index.lambda_handler",
                 code=lambda_.Code.from_asset("lambda"),
@@ -76,7 +76,7 @@ class DyndnsStack(cdk.Stack):
             )
         else:
             fn = lambda_.Function(self, "dyndns_fn",
-                runtime=lambda_.Runtime.PYTHON_3_9,
+                runtime=lambda_.Runtime.PYTHON_3_10,
                 architecture=lambda_.Architecture.ARM_64,
                 handler="index.lambda_handler",
                 code=lambda_.Code.from_asset("lambda"),

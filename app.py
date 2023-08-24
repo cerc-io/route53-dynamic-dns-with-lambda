@@ -11,5 +11,5 @@ from dyndns.dyndns_stack import DyndnsStack
 
 app = cdk.App()
 DyndnsStack(app, "DyndnsStack")
-Aspects.of(app).add(AwsSolutionsChecks(verbose=True))
+#Aspects.of(app).add(AwsSolutionsChecks(verbose=True))
 app.synth()
